@@ -1,12 +1,20 @@
 # UZB Savat — demo sayt
 
-Statik sayt (HTML/CSS/JS), build kerak emas. `index.html` ni oching.
+Statik ko'p sahifali sayt: `index`, `catalog`, `gifts`, `delivery`, `contact`.
+Tillar: o'zbek / rus / ingliz. Kunduzgi va tungi rejim, 5 ta rang palitrasi.
 
-- `data/products.js` — mahsulotlar va narxlar (hozir DEMO)
-- `images/<id>.jpg` — mahsulot rasmi (masalan `images/olma.jpg`); bo'lmasa emoji ko'rinadi
-- `js/config.js` — telefon, username, yetkazib berish narxi, `orderEndpoint`
-- Buyurtma Telegram-botga **server orqali** yuboriladi (bot tokenini brauzerga qo'ymang). `orderEndpoint` bo'sh bo'lsa — demo rejim.
+## Tahrirlash
+- Matnlar: `js/i18n.js` (har bir kalit uchun uz/ru/en)
+- Mahsulotlar va narxlar: `data/products.js` (hozir DEMO narxlar)
+- Telefon, username, yetkazish narxi: `js/config.js`
+- Sahifalar `tools/build.js` dan yig'iladi. Matn yoki tuzilmani o'zgartirgandan keyin: `node tools/build.js`
 
 ## Rasmlar
+`images/` papkasiga quyidagi nomlar bilan qo'ying — sayt ularni o'zi ko'rsatadi, bo'lmasa "Surat joyi" ko'rinadi:
 
-Hozirgi suratlar Unsplash'dan (`data/products.js` -> `PHOTOS`). Haqiqiy do'kon suratlariga almashtirish uchun `images/` papkasiga qo'ying va `PHOTOS` manzillarini yangilang.
+`hero.jpg`, `cat-meva.jpg`, `cat-quruq.jpg`, `cat-yongoq.jpg`, `cat-sovga.jpg`, `gifts.jpg`, `gifts-2.jpg`,
+`gift-mini.jpg`, `gift-oila.jpg`, `gift-premium.jpg`, `custom.jpg`, `custom-2.jpg`, `shop.jpg`
+
+## Buyurtmalar
+Buyurtma Telegram-botga **server orqali** yuboriladi (bot tokenini brauzerga qo'ymang).
+`js/config.js` dagi `orderEndpoint` bo'sh bo'lsa — demo rejim.
