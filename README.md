@@ -6,3 +6,7 @@ Statik sayt (HTML/CSS/JS), build kerak emas. `index.html` ni oching.
 - `images/<id>.jpg` — mahsulot rasmi (masalan `images/olma.jpg`); bo'lmasa emoji ko'rinadi
 - `js/config.js` — telefon, username, yetkazib berish narxi, `orderEndpoint`
 - Buyurtma Telegram-botga **server orqali** yuboriladi (bot tokenini brauzerga qo'ymang). `orderEndpoint` bo'sh bo'lsa — demo rejim.
+
+## Rasmlar
+
+Hozirgi suratlar Unsplash'dan (`data/products.js` -> `PHOTOS`). Haqiqiy do'kon suratlariga almashtirish uchun `images/` papkasiga qo'ying va `PHOTOS` manzillarini yangilang.

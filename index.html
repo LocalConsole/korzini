@@ -3,140 +3,150 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UZB Savat — Toshkentda yangi meva va quruq mevalar yetkazib berish</title>
-<meta name="description" content="Toshkentda meva yetkazib berish: yangi mevalar, quruq mevalar, yong'oq va tayyor sovg'a savatlari. Rasm va narxlar bilan katalog, onlayn buyurtma, tez yetkazib berish.">
-<meta name="keywords" content="Toshkentda meva yetkazib berish, quruq mevalar, sovg'a savati, meva savatlari, to'y savati, yong'oq, mayiz">
+<title>UZB Savat — Toshkentda meva va quruq mevalar yetkazib berish</title>
+<meta name="description" content="Toshkentda meva yetkazib berish: yangi mevalar, quruq mevalar, yong'oq va tayyor sovg'a savatlari. Narxlar ro'yxati, onlayn buyurtma, uyingizgacha yetkazish.">
+<meta name="keywords" content="Toshkentda meva yetkazib berish, quruq mevalar, sovg'a savati, to'y savati, yong'oq, mayiz">
 <meta property="og:title" content="UZB Savat — meva va sovg'a savatlari">
 <meta property="og:description" content="Toshkentda yangi meva, quruq meva va sovg'a savatlarini uyingizgacha yetkazib beramiz.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#1f7a4d">
+<meta name="theme-color" content="#14251d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"GroceryStore","name":"UZB Savat","description":"Yangi mevalar, quruq mevalar va sovg'a savatlari yetkazib berish","areaServed":"Toshkent","address":{"@type":"PostalAddress","addressLocality":"Toshkent","addressCountry":"UZ"},"sameAs":["https://instagram.com/uzb_savat"]}
 </script>
 </head>
 <body>
+<a class="skip" href="#catalog">Katalogga o'tish</a>
 
 <header class="header" id="top">
-  <div class="container header__in">
-    <a class="logo" href="#top"><span class="logo__mark">🧺</span><span>UZB <b>Savat</b></span></a>
-    <nav class="nav" id="nav">
-      <a href="#catalog">Katalog</a>
+  <div class="wrap header__in">
+    <a class="logo" href="#top">UZB Savat</a>
+    <nav class="nav" id="nav" aria-label="Asosiy menyu">
+      <a href="#catalog">Narxlar</a>
       <a href="#gifts">Sovg'a savatlari</a>
       <a href="#delivery">Yetkazib berish</a>
       <a href="#faq">Savollar</a>
       <a href="#contact">Aloqa</a>
     </nav>
-    <button class="cart-btn" id="openCart" aria-label="Savat">🛒 <span id="cartCount">0</span></button>
-    <button class="burger" id="burger" aria-label="Menyu">☰</button>
+    <button class="cart-btn" id="openCart" aria-label="Savatni ochish">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9.5" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
+      <span>Savat</span><b id="cartCount">0</b>
+    </button>
+    <button class="burger" id="burger" aria-label="Menyu" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>
 
 <main>
 <section class="hero">
-  <div class="container hero__in">
+  <div class="wrap hero__in">
     <div class="hero__text">
-      <span class="chip">🚚 Toshkent bo'ylab yetkazib berish</span>
-      <h1>Yangi meva va quruq mevalar — <em>uyingizgacha</em></h1>
-      <p>Tanlang, savatga soling, buyurtma bering. Telefon qilish shart emas — narx va yetkazish vaqti oldindan ko'rinadi.</p>
+      <h1>Mevalar bozordan — to'g'ri uyingizgacha</h1>
+      <p>Yangi va quruq mevalar, yong'oq va tayyor sovg'a savatlari. Narxlar oldindan ko'rinadi, buyurtma bir daqiqada, yetkazish butun Toshkent bo'ylab.</p>
       <div class="hero__cta">
-        <a class="btn" href="#catalog">Katalogni ko'rish</a>
-        <a class="btn btn--ghost" href="#gifts">Sovg'a savatlari</a>
+        <a class="btn" href="#catalog">Narxlar ro'yxati</a>
+        <a class="btn btn--line" href="#gifts">Sovg'a savatlari</a>
       </div>
-      <ul class="hero__facts">
-        <li><b>36 000+</b> Instagram obunachi</li>
-        <li><b>10 000+</b> mamnun mijoz</li>
-        <li><b>24 yil</b> tajriba</li>
-      </ul>
+      <dl class="facts">
+        <div><dt>36 000+</dt><dd>Instagram obunachi</dd></div>
+        <div><dt>10 000+</dt><dd>mamnun mijoz</dd></div>
+        <div><dt>24 yil</dt><dd>tajriba</dd></div>
+      </dl>
     </div>
-    <div class="hero__art" aria-hidden="true">
-      <div class="blob"></div>
-      <span class="f f1">🍎</span><span class="f f2">🍇</span><span class="f f3">🍑</span>
-      <span class="f f4">🥜</span><span class="f f5">🍊</span><span class="f f6">🎁</span>
+    <div class="hero__photos">
+      <img class="p1" id="ph-hero" alt="Quruq mevalar va yong'oqlar peshtaxtada" width="700" height="520">
+      <img class="p2" id="ph-dried" alt="Quritilgan mevalar uyumi" width="320" height="320">
+      <img class="p3" id="ph-nuts" alt="Mayiz va yong'oq yog'och qoshiqlarda" width="320" height="320">
     </div>
   </div>
 </section>
 
-<section class="perks">
-  <div class="container perks__in">
-    <div><span>⚡</span><b>Tez yetkazish</b><small>Toshkent bo'ylab</small></div>
-    <div><span>✅</span><b>Sifat kafolati</b><small>Har bir mahsulot saralangan</small></div>
-    <div><span>📲</span><b>Onlayn buyurtma</b><small>Telegram orqali darhol</small></div>
-    <div><span>🎁</span><b>Tayyor sovg'alar</b><small>To'y, bayram, mehmon</small></div>
+<section class="band">
+  <div class="wrap band__in">
+    <p><b>Toshkent bo'ylab</b> yetkazib berish</p>
+    <p><b>Saralangan</b> mahsulot, sifat kafolati</p>
+    <p><b>Buyurtma</b> darhol Telegram'ga tushadi</p>
+    <p><b>Tayyor savatlar</b> to'y va bayram uchun</p>
   </div>
 </section>
 
 <section class="section" id="catalog">
-  <div class="container">
-    <div class="section__head">
-      <h2>Katalog</h2>
-      <p>Rasm va narxlar bilan — buyurtma uchun qo'ng'iroq qilish shart emas.</p>
+  <div class="wrap">
+    <div class="head">
+      <h2>Narxlar ro'yxati</h2>
+      <p>Qo'ng'iroq qilish shart emas: tanlang, savatga soling, buyurtma bering.</p>
     </div>
     <div class="tools">
-      <div class="tabs" id="tabs"></div>
-      <input class="search" id="search" type="search" placeholder="🔎 Qidirish: olma, bodom...">
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <label class="search"><span class="sr">Qidirish</span><input id="search" type="search" placeholder="Qidirish: olma, bodom..."></label>
     </div>
-    <div class="grid" id="grid"></div>
-    <p class="empty" id="empty" hidden>Hech narsa topilmadi.</p>
+    <div id="list"></div>
+    <p class="empty" id="empty" hidden>Hech narsa topilmadi. Boshqa so'z bilan qidirib ko'ring.</p>
   </div>
 </section>
 
-<section class="section section--alt" id="gifts">
-  <div class="container">
-    <div class="section__head">
+<section class="section section--tint" id="gifts">
+  <div class="wrap">
+    <div class="head">
       <h2>Tayyor sovg'a savatlari</h2>
-      <p>To'y, bayram, mehmondorchilik uchun — chiroyli qadoqda, tayyor holda.</p>
+      <p>To'y, bayram yoki mehmondorchilik uchun. Tarkibni o'zingizga moslab yig'ib ham beramiz.</p>
     </div>
-    <div class="grid" id="giftGrid"></div>
+    <div class="gifts" id="giftGrid"></div>
   </div>
 </section>
 
-<section class="section" id="delivery">
-  <div class="container">
-    <div class="section__head"><h2>Savatcha va yetkazib berish</h2></div>
-    <div class="steps">
-      <div class="step"><i>1</i><h3>Tanlang</h3><p>Katalogdan mahsulot va miqdorni belgilang.</p></div>
-      <div class="step"><i>2</i><h3>Manzilni yozing</h3><p>Ism, telefon, manzil va qulay vaqt.</p></div>
-      <div class="step"><i>3</i><h3>Buyurtma bizda</h3><p>Buyurtma darhol Telegram-botga tushadi.</p></div>
-      <div class="step"><i>4</i><h3>Qabul qiling</h3><p>Kuryer ko'rsatilgan vaqtda yetkazadi.</p></div>
+<section class="section section--dark" id="delivery">
+  <div class="wrap delivery">
+    <div>
+      <h2>Qanday buyurtma beriladi</h2>
+      <ol class="steps">
+        <li><h3>Tanlang</h3><p>Ro'yxatdan mahsulot va miqdorni belgilang.</p></li>
+        <li><h3>Manzilni yozing</h3><p>Ism, telefon, manzil va qulay vaqt.</p></li>
+        <li><h3>Buyurtma bizga tushadi</h3><p>U darhol Telegram-botimizga keladi: ism, telefon, manzil va tarkibi.</p></li>
+        <li><h3>Qabul qiling</h3><p>Kuryer kelishilgan vaqtda uyingizga olib boradi.</p></li>
+      </ol>
+      <p class="note" id="deliveryNote"></p>
     </div>
-    <p class="note" id="deliveryNote"></p>
+    <img id="ph-boxes" alt="Turli mevalar solingan qutilar" width="560" height="640">
   </div>
 </section>
 
-<section class="section section--alt" id="faq">
-  <div class="container narrow">
-    <div class="section__head"><h2>Ko'p so'raladigan savollar</h2></div>
-    <details><summary>Yetkazib berish qancha vaqt oladi?</summary><p>Toshkent bo'ylab odatda buyurtma kuni yoki ertasiga. Aniq vaqtni buyurtma paytida tanlaysiz.</p></details>
-    <details><summary>Qanday to'lash mumkin?</summary><p>Naqd yoki karta orqali kuryerga qabul qilganda.</p></details>
-    <details><summary>Sovg'a savatini o'zimga moslab yig'ib bera olasizmi?</summary><p>Ha, tarkib va byudjetni izohga yozing — savatni siz uchun yig'amiz.</p></details>
-    <details><summary>Mahsulot sifatiga ishonch bormi?</summary><p>Har bir mahsulot jo'natishdan oldin saralanadi. Mos kelmasa, almashtirib beramiz.</p></details>
+<section class="section" id="faq">
+  <div class="wrap faq">
+    <div class="head"><h2>Savollar va javoblar</h2></div>
+    <div>
+      <details><summary>Yetkazish qancha vaqt oladi?</summary><p>Toshkent bo'ylab odatda buyurtma kuni yoki ertasiga. Aniq vaqtni buyurtma paytida yozasiz.</p></details>
+      <details><summary>Qanday to'lanadi?</summary><p>Naqd yoki karta orqali, kuryerga qabul qilganingizda.</p></details>
+      <details><summary>Sovg'a savatini o'zimga moslab olsam bo'ladimi?</summary><p>Ha. Tarkib va byudjetni izohga yozing, savatni siz uchun yig'amiz.</p></details>
+      <details><summary>Sifat mos kelmasa nima bo'ladi?</summary><p>Mahsulot jo'natishdan oldin saralanadi. Mos kelmasa, almashtirib beramiz.</p></details>
+    </div>
   </div>
 </section>
 
-<section class="section" id="contact">
-  <div class="container contact">
+<section class="section section--tint" id="contact">
+  <div class="wrap contact">
     <div>
       <h2>Aloqa</h2>
-      <p>Savolingiz bormi? Yozing — tez javob beramiz.</p>
-      <ul class="clist" id="clist"></ul>
+      <p>Savol yoki maxsus buyurtma bo'lsa, yozing. Tez javob beramiz.</p>
     </div>
-    <div class="contact__card"><span>🧺</span><b>UZB Savat</b><small>Toshkent</small></div>
+    <ul class="clist" id="clist"></ul>
   </div>
 </section>
 </main>
 
 <footer class="footer">
-  <div class="container footer__in">
-    <span>© <span id="year"></span> UZB Savat</span>
-    <span class="demo">Demo-versiya · sayt yaratuvchi: WebBuild</span>
+  <div class="wrap footer__in">
+    <span>&copy; <span id="year"></span> UZB Savat</span>
+    <span>Demo-versiya. Sayt: WebBuild</span>
   </div>
 </footer>
 
-<!-- Savat -->
 <div class="overlay" id="overlay" hidden></div>
-<aside class="drawer" id="drawer" aria-hidden="true">
-  <div class="drawer__head"><h3>Savat</h3><button id="closeCart" aria-label="Yopish">✕</button></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Savat">
+  <div class="drawer__head"><h3>Savat</h3><button id="closeCart" aria-label="Savatni yopish">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
   <div class="drawer__body" id="cartItems"></div>
   <form class="drawer__foot" id="orderForm" novalidate>
     <div class="totals">
@@ -144,11 +154,11 @@
       <div><span>Yetkazib berish</span><b id="fee">0</b></div>
       <div class="totals__sum"><span>Jami</span><b id="total">0</b></div>
     </div>
-    <input name="name" placeholder="Ismingiz" required autocomplete="name">
-    <input name="phone" type="tel" placeholder="Telefon: +998 __ ___ __ __" required autocomplete="tel">
-    <input name="address" placeholder="Manzil (tuman, ko'cha, uy)" required autocomplete="street-address">
-    <input name="time" placeholder="Qulay vaqt (masalan: bugun 18:00 dan keyin)">
-    <textarea name="note" rows="2" placeholder="Izoh (ixtiyoriy)"></textarea>
+    <input name="name" placeholder="Ismingiz" required autocomplete="name" aria-label="Ismingiz">
+    <input name="phone" type="tel" placeholder="Telefon: +998 __ ___ __ __" required autocomplete="tel" aria-label="Telefon">
+    <input name="address" placeholder="Manzil: tuman, ko'cha, uy" required autocomplete="street-address" aria-label="Manzil">
+    <input name="time" placeholder="Qulay vaqt, masalan: bugun 18:00 dan keyin" aria-label="Qulay vaqt">
+    <textarea name="note" rows="2" placeholder="Izoh (ixtiyoriy)" aria-label="Izoh"></textarea>
     <button class="btn btn--block" type="submit" id="submitBtn">Buyurtma berish</button>
     <p class="form-msg" id="formMsg" role="status"></p>
   </form>
