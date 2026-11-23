@@ -202,15 +202,38 @@
   }
   var sysMq = window.matchMedia("(prefers-color-scheme: dark)");
   function resolveTheme(t) { return t === "system" ? (sysMq.matches ? "dark" : "light") : t; }
-  function setTheme(t) { store.set("us_theme", t); html.setAttribute("data-theme", resolveTheme(t)); syncSettings(); }
+  var lastPoint = null;
+  document.addEventListener("pointerdown", function (e) { lastPoint = [e.clientX, e.clientY]; }, true);
+  // Mavzu/palitra almashishi: bosilgan joydan doira bo'lib tarqaladi (View Transitions), bo'lmasa — rang silliq o'tadi
+  function smoothly(apply) {
+    if (reduce) { apply(); return; }
+    if (document.startViewTransition) {
+      var p = lastPoint || [innerWidth / 2, innerHeight / 2];
+      html.style.setProperty("--vx", p[0] + "px"); html.style.setProperty("--vy", p[1] + "px");
+      html.style.setProperty("--vr", Math.hypot(Math.max(p[0], innerWidth - p[0]), Math.max(p[1], innerHeight - p[1])) + "px");
+      html.classList.add("vt-theme");
+      var vt = document.startViewTransition(apply);
+      vt.finished.finally(function () { html.classList.remove("vt-theme"); });
+    } else {
+      html.classList.add("tint-fade"); apply();
+      setTimeout(function () { html.classList.remove("tint-fade"); }, 700);
+    }
+    lastPoint = null;
+  }
+  function setTheme(t) { store.set("us_theme", t); var r = resolveTheme(t); if (r === html.getAttribute("data-theme")) { syncSettings(); return; } smoothly(function () { html.setAttribute("data-theme", r); syncSettings(); }); }
   if (sysMq.addEventListener) sysMq.addEventListener("change", function () { if (store.get("us_theme", "system") === "system") setTheme("system"); });
   function setPal(p) {
-    if (p !== "custom") ["--a", "--a-dk", "--b"].forEach(function (k) { html.style.removeProperty(k); });
-    html.setAttribute("data-palette", p); store.set("us_pal", p); syncSettings();
+    store.set("us_pal", p);
+    if (p === html.getAttribute("data-palette")) { syncSettings(); return; }
+    smoothly(function () {
+      if (p !== "custom") ["--a", "--a-dk", "--b"].forEach(function (k) { html.style.removeProperty(k); });
+      html.setAttribute("data-palette", p); syncSettings();
+    });
   }
   function setVars(vars) {
     Object.keys(vars).forEach(function (k) { html.style.setProperty(k, vars[k]); });
-    store.set("us_custom_vars", JSON.stringify(vars)); setPal("custom");
+    store.set("us_custom_vars", JSON.stringify(vars)); store.set("us_pal", "custom");
+    html.setAttribute("data-palette", "custom"); syncSettings();
   }
   function setMotion(m) { store.set("us_motion", m); location.reload(); }
 
@@ -343,28 +366,28 @@
   function startReveal() {
     var els = $$(".reveal, .words, .steps li, [data-count], #bigword, .ph");
     if (reduce || !("IntersectionObserver" in window)) { els.forEach(function (el) { el.classList.add("in"); countUp(el, true); }); return; }
+    // Ikki kuzatuvchi (gisterezis): kirish — ekranga kirganda, chiqish — ekrandan ancha uzoqlashganda.
+    // Bitta chegara bo'lsa, animatsiyaning o'z siljishi elementni chegaradan o'tkazib, miltillash beradi.
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         var el = en.target;
-        if (en.isIntersecting) {
-          if (el.classList.contains("in")) return;
-          el.style.transition = "none";
-          el.setAttribute("data-dir", scrollDir);
-          void el.offsetWidth;
-          el.style.transition = "";
-          requestAnimationFrame(function () { el.classList.add("in"); });
-          if (!el._counted) { el._counted = 1; countUp(el); }
-        } else if (el.classList.contains("in")) {
-          // ekrandan chiqdi: qaytib kirganda yo'nalishga qarab yana animatsiya
-          el.classList.remove("in");
-        }
+        if (!en.isIntersecting || el.classList.contains("in")) return;
+        el.style.transition = "none";
+        el.setAttribute("data-dir", scrollDir);
+        void el.offsetWidth;
+        el.style.transition = "";
+        requestAnimationFrame(function () { el.classList.add("in"); });
+        if (!el._counted) { el._counted = 1; countUp(el); }
       });
     }, { threshold: 0.08, rootMargin: "-4% 0px -4% 0px" });
+    var out = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (!en.isIntersecting) en.target.classList.remove("in"); });
+    }, { threshold: 0, rootMargin: "25% 0px 25% 0px" });
     var vh = window.innerHeight;
     els.forEach(function (el) {
       var r = el.getBoundingClientRect();
       if (r.top < vh && r.bottom > 0) { el.setAttribute("data-dir", "down"); el.classList.add("in"); el._counted = 1; countUp(el); }
-      io.observe(el);
+      io.observe(el); out.observe(el);
     });
   }
   /* ---------- scroll-linked: progress, emblems, ribbons ---------- */
