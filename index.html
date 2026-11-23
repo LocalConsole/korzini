@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UZB Savat — Toshkentda yangi meva va quruq mevalar yetkazib berish</title>
+<meta name="description" content="Toshkentda meva yetkazib berish: yangi mevalar, quruq mevalar, yong'oq va tayyor sovg'a savatlari. Rasm va narxlar bilan katalog, onlayn buyurtma, tez yetkazib berish.">
+<meta name="keywords" content="Toshkentda meva yetkazib berish, quruq mevalar, sovg'a savati, meva savatlari, to'y savati, yong'oq, mayiz">
+<meta property="og:title" content="UZB Savat — meva va sovg'a savatlari">
+<meta property="og:description" content="Toshkentda yangi meva, quruq meva va sovg'a savatlarini uyingizgacha yetkazib beramiz.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1f7a4d">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"GroceryStore","name":"UZB Savat","description":"Yangi mevalar, quruq mevalar va sovg'a savatlari yetkazib berish","areaServed":"Toshkent","address":{"@type":"PostalAddress","addressLocality":"Toshkent","addressCountry":"UZ"},"sameAs":["https://instagram.com/uzb_savat"]}
+</script>
+</head>
+<body>
+
+<header class="header" id="top">
+  <div class="container header__in">
+    <a class="logo" href="#top"><span class="logo__mark">🧺</span><span>UZB <b>Savat</b></span></a>
+    <nav class="nav" id="nav">
+      <a href="#catalog">Katalog</a>
+      <a href="#gifts">Sovg'a savatlari</a>
+      <a href="#delivery">Yetkazib berish</a>
+      <a href="#faq">Savollar</a>
+      <a href="#contact">Aloqa</a>
+    </nav>
+    <button class="cart-btn" id="openCart" aria-label="Savat">🛒 <span id="cartCount">0</span></button>
+    <button class="burger" id="burger" aria-label="Menyu">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero__in">
+    <div class="hero__text">
+      <span class="chip">🚚 Toshkent bo'ylab yetkazib berish</span>
+      <h1>Yangi meva va quruq mevalar — <em>uyingizgacha</em></h1>
+      <p>Tanlang, savatga soling, buyurtma bering. Telefon qilish shart emas — narx va yetkazish vaqti oldindan ko'rinadi.</p>
+      <div class="hero__cta">
+        <a class="btn" href="#catalog">Katalogni ko'rish</a>
+        <a class="btn btn--ghost" href="#gifts">Sovg'a savatlari</a>
+      </div>
+      <ul class="hero__facts">
+        <li><b>36 000+</b> Instagram obunachi</li>
+        <li><b>10 000+</b> mamnun mijoz</li>
+        <li><b>24 yil</b> tajriba</li>
+      </ul>
+    </div>
+    <div class="hero__art" aria-hidden="true">
+      <div class="blob"></div>
+      <span class="f f1">🍎</span><span class="f f2">🍇</span><span class="f f3">🍑</span>
+      <span class="f f4">🥜</span><span class="f f5">🍊</span><span class="f f6">🎁</span>
+    </div>
+  </div>
+</section>
+
+<section class="perks">
+  <div class="container perks__in">
+    <div><span>⚡</span><b>Tez yetkazish</b><small>Toshkent bo'ylab</small></div>
+    <div><span>✅</span><b>Sifat kafolati</b><small>Har bir mahsulot saralangan</small></div>
+    <div><span>📲</span><b>Onlayn buyurtma</b><small>Telegram orqali darhol</small></div>
+    <div><span>🎁</span><b>Tayyor sovg'alar</b><small>To'y, bayram, mehmon</small></div>
+  </div>
+</section>
+
+<section class="section" id="catalog">
+  <div class="container">
+    <div class="section__head">
+      <h2>Katalog</h2>
+      <p>Rasm va narxlar bilan — buyurtma uchun qo'ng'iroq qilish shart emas.</p>
+    </div>
+    <div class="tools">
+      <div class="tabs" id="tabs"></div>
+      <input class="search" id="search" type="search" placeholder="🔎 Qidirish: olma, bodom...">
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" hidden>Hech narsa topilmadi.</p>
+  </div>
+</section>
+
+<section class="section section--alt" id="gifts">
+  <div class="container">
+    <div class="section__head">
+      <h2>Tayyor sovg'a savatlari</h2>
+      <p>To'y, bayram, mehmondorchilik uchun — chiroyli qadoqda, tayyor holda.</p>
+    </div>
+    <div class="grid" id="giftGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="delivery">
+  <div class="container">
+    <div class="section__head"><h2>Savatcha va yetkazib berish</h2></div>
+    <div class="steps">
+      <div class="step"><i>1</i><h3>Tanlang</h3><p>Katalogdan mahsulot va miqdorni belgilang.</p></div>
+      <div class="step"><i>2</i><h3>Manzilni yozing</h3><p>Ism, telefon, manzil va qulay vaqt.</p></div>
+      <div class="step"><i>3</i><h3>Buyurtma bizda</h3><p>Buyurtma darhol Telegram-botga tushadi.</p></div>
+      <div class="step"><i>4</i><h3>Qabul qiling</h3><p>Kuryer ko'rsatilgan vaqtda yetkazadi.</p></div>
+    </div>
+    <p class="note" id="deliveryNote"></p>
+  </div>
+</section>
+
+<section class="section section--alt" id="faq">
+  <div class="container narrow">
+    <div class="section__head"><h2>Ko'p so'raladigan savollar</h2></div>
+    <details><summary>Yetkazib berish qancha vaqt oladi?</summary><p>Toshkent bo'ylab odatda buyurtma kuni yoki ertasiga. Aniq vaqtni buyurtma paytida tanlaysiz.</p></details>
+    <details><summary>Qanday to'lash mumkin?</summary><p>Naqd yoki karta orqali kuryerga qabul qilganda.</p></details>
+    <details><summary>Sovg'a savatini o'zimga moslab yig'ib bera olasizmi?</summary><p>Ha, tarkib va byudjetni izohga yozing — savatni siz uchun yig'amiz.</p></details>
+    <details><summary>Mahsulot sifatiga ishonch bormi?</summary><p>Har bir mahsulot jo'natishdan oldin saralanadi. Mos kelmasa, almashtirib beramiz.</p></details>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container contact">
+    <div>
+      <h2>Aloqa</h2>
+      <p>Savolingiz bormi? Yozing — tez javob beramiz.</p>
+      <ul class="clist" id="clist"></ul>
+    </div>
+    <div class="contact__card"><span>🧺</span><b>UZB Savat</b><small>Toshkent</small></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__in">
+    <span>© <span id="year"></span> UZB Savat</span>
+    <span class="demo">Demo-versiya · sayt yaratuvchi: WebBuild</span>
+  </div>
+</footer>
+
+<!-- Savat -->
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer__head"><h3>Savat</h3><button id="closeCart" aria-label="Yopish">✕</button></div>
+  <div class="drawer__body" id="cartItems"></div>
+  <form class="drawer__foot" id="orderForm" novalidate>
+    <div class="totals">
+      <div><span>Mahsulotlar</span><b id="sub">0</b></div>
+      <div><span>Yetkazib berish</span><b id="fee">0</b></div>
+      <div class="totals__sum"><span>Jami</span><b id="total">0</b></div>
+    </div>
+    <input name="name" placeholder="Ismingiz" required autocomplete="name">
+    <input name="phone" type="tel" placeholder="Telefon: +998 __ ___ __ __" required autocomplete="tel">
+    <input name="address" placeholder="Manzil (tuman, ko'cha, uy)" required autocomplete="street-address">
+    <input name="time" placeholder="Qulay vaqt (masalan: bugun 18:00 dan keyin)">
+    <textarea name="note" rows="2" placeholder="Izoh (ixtiyoriy)"></textarea>
+    <button class="btn btn--block" type="submit" id="submitBtn">Buyurtma berish</button>
+    <p class="form-msg" id="formMsg" role="status"></p>
+  </form>
+</aside>
+
+<script src="js/config.js"></script>
+<script src="data/products.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
