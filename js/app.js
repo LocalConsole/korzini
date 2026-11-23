@@ -52,11 +52,16 @@
       fig.setAttribute("data-init", "1");
       var src = fig.getAttribute("data-src");
       if (phCache[src] === "fail") return;
+      // avval o'z surati (images/...), bo'lmasa — config.photos dagi vaqtinchalik surat, u ham bo'lmasa — chizma qoladi
+      var file = src.replace("images/", ""), fallback = C.photos && C.photos[file];
       var img = new Image();
       img.alt = "";
       img.decoding = "async";
       img.onload = function () { phCache[src] = "ok"; fig.appendChild(img); requestAnimationFrame(function () { fig.classList.add("has"); }); };
-      img.onerror = function () { phCache[src] = "fail"; };
+      img.onerror = function () {
+        if (fallback && img.src.indexOf(fallback) < 0) { img.src = fallback; return; }
+        phCache[src] = "fail";
+      };
       img.src = src;
     });
   }

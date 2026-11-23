@@ -149,7 +149,7 @@
   k("city", "Toshkent", "Ташкент", "Tashkent");
 
   k("foot.tag", "Meva, quruq meva va sovg'a savatlari. Toshkent.", "Фрукты, сухофрукты и подарочные корзины. Ташкент.", "Fruit, dried fruit and gift baskets. Tashkent.");
-  k("foot.demo", "Demo-versiya. Sayt: WebBuild", "Демо-версия. Сайт: WebBuild", "Demo version. Site by WebBuild");
+  k("foot.demo", "Demo-versiya. Sayt: WebBuild. Suratlar: Unsplash", "Демо-версия. Сайт: WebBuild. Фото: Unsplash", "Demo version. Site by WebBuild. Photos: Unsplash");
 
   if (typeof module !== "undefined") module.exports = D; else g.I18N = D;
 })(this);

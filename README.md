@@ -10,6 +10,8 @@ Tillar: o'zbek / rus / ingliz. Kunduzgi va tungi rejim, 5 ta rang palitrasi.
 - Sahifalar `tools/build.js` dan yig'iladi. Matn yoki tuzilmani o'zgartirgandan keyin: `node tools/build.js`
 
 ## Rasmlar
+Hozir vaqtinchalik Unsplash suratlari (`js/config.js` → `photos`, bepul tijorat litsenziyasi). Do'kon o'z suratlarini `images/` ga qo'yishi bilan ular avtomatik almashtiriladi.
+
 `images/` papkasiga quyidagi nomlar bilan qo'ying — sayt ularni o'zi ko'rsatadi, bo'lmasa "Surat joyi" ko'rinadi:
 
 `hero.jpg`, `cat-meva.jpg`, `cat-quruq.jpg`, `cat-yongoq.jpg`, `cat-sovga.jpg`, `gifts.jpg`, `gifts-2.jpg`,
