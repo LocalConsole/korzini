@@ -5,8 +5,8 @@
   --a:#9b2242;--a-dk:#ff8fa8;--b:#ee9b45;--leaf:#5d8a3a;
 }
 html[data-palette=anor]{--a:#9b2242;--a-dk:#ff8fa8;--b:#ee9b45}
-html[data-palette=pista]{--a:#4a7624;--a-dk:#a9d86f;--b:#dcb43a}
-html[data-palette=orik]{--a:#c25c16;--a-dk:#ffab66;--b:#2c6e68}
+html[data-palette=pista]{--a:#436b20;--a-dk:#a9d86f;--b:#dcb43a}
+html[data-palette=orik]{--a:#a34a0f;--a-dk:#ffab66;--b:#62b8ad}
 html[data-palette=uzum]{--a:#5a2b88;--a-dk:#c8a2ff;--b:#e26f9c}
 html[data-palette=feruza]{--a:#0b737d;--a-dk:#63d5d7;--b:#ee974a}
 
@@ -99,8 +99,8 @@ h3{font-size:1.1rem;letter-spacing:-.01em}
 .sw:hover{transform:scale(1.1)}.sw[aria-pressed=true]{border-color:var(--ink)}
 .sw i{display:block;width:100%;height:100%;border-radius:50%}
 .sw--anor i{background:linear-gradient(135deg,#9b2242 55%,#ee9b45 55%)}
-.sw--pista i{background:linear-gradient(135deg,#4a7624 55%,#dcb43a 55%)}
-.sw--orik i{background:linear-gradient(135deg,#c25c16 55%,#2c6e68 55%)}
+.sw--pista i{background:linear-gradient(135deg,#436b20 55%,#dcb43a 55%)}
+.sw--orik i{background:linear-gradient(135deg,#a34a0f 55%,#62b8ad 55%)}
 .sw--uzum i{background:linear-gradient(135deg,#5a2b88 55%,#e26f9c 55%)}
 .sw--feruza i{background:linear-gradient(135deg,#0b737d 55%,#ee974a 55%)}
 
@@ -297,11 +297,12 @@ details p{color:var(--mut);padding-bottom:20px;max-width:38em;animation:pop .35s
 .splash{display:none}
 .splash-on body{overflow:hidden}
 .splash-on .splash{display:block;position:fixed;inset:0;z-index:100;pointer-events:none}
-.splash__l{position:absolute;inset:0;transition:transform 1s var(--ease-io)}
+.splash__l{position:absolute;inset:0;transition:transform .8s var(--ease-io)}
+.splash-go .splash{pointer-events:none!important}
 .splash__l1{background:var(--b)}
 .splash__l2{background:var(--deep);color:var(--on-deep);display:grid;place-items:center;overflow:hidden}
 .splash-go .splash__l2{transform:translateY(-100%)}
-.splash-go .splash__l1{transform:translateY(-100%);transition-delay:.16s}
+.splash-go .splash__l1{transform:translateY(-100%);transition-delay:.12s}
 .splash-go .splash__in,.splash-go .splash__burst{opacity:0;transform:scale(.92);transition:opacity .35s,transform .5s var(--ease)}
 .splash__in{position:relative;display:grid;justify-items:center;gap:20px;z-index:2}
 .splash__star{width:96px;height:96px;color:var(--b);animation:spin 1.8s var(--ease) both}
@@ -338,9 +339,11 @@ details p{color:var(--mut);padding-bottom:20px;max-width:38em;animation:pop .35s
 .js .steps li[data-dir=up]:not(.in){transform:translateX(30px)}
 
 /* ========== Photo slots with illustrations ========== */
-.ph{position:relative;overflow:hidden;margin:0;background:var(--soft);isolation:isolate;transform:translateZ(0);transition:clip-path 1.2s var(--ease)}
-.js .ph:not(.in){clip-path:inset(100% 0 0 0)}
-.js .ph[data-dir=up]:not(.in){clip-path:inset(0 0 100% 0)}
+.ph{position:relative;overflow:hidden;margin:0;background:transparent;isolation:isolate;transform:translateZ(0)}
+/* clip-path ichki qatlamda: kuzatiladigan .ph hech qachon to'liq kesilmaydi (aks holda IntersectionObserver uni ko'rmaydi) */
+.ph>.ph__empty,.ph>img{transition:clip-path 1.2s var(--ease),opacity .7s}
+.js .ph:not(.in)>.ph__empty,.js .ph:not(.in)>img{clip-path:inset(100% 0 0 0)}
+.js .ph[data-dir=up]:not(.in)>.ph__empty,.js .ph[data-dir=up]:not(.in)>img{clip-path:inset(0 0 100% 0)}
 .ph--arch{border-radius:999px 999px var(--r) var(--r)}
 .ph--round{border-radius:var(--r)}
 .ph--circle{border-radius:50%;aspect-ratio:1}
@@ -352,7 +355,7 @@ details p{color:var(--mut);padding-bottom:20px;max-width:38em;animation:pop .35s
 .js .ph:not(.in) .fr{transform:translate(-50%,-50%) rotate(calc(var(--r) - 40deg)) scale(0);transition-delay:0s}
 .fr svg{width:100%;height:100%;filter:drop-shadow(0 8px 10px rgba(40,20,10,.18));animation:drift var(--f,6s) ease-in-out infinite;animation-delay:calc(var(--d)*-3)}
 .cat:hover .fr{transform:translate(-50%,-50%) rotate(calc(var(--r) + 14deg)) scale(1.1);transition-delay:0s}
-.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s,transform .8s var(--ease)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;border-radius:inherit}
 .ph.has img{opacity:1}.ph.has .ph__empty{display:none}
 @keyframes turn{to{transform:rotate(360deg)}}
 
@@ -404,6 +407,38 @@ details p{color:var(--mut);padding-bottom:20px;max-width:38em;animation:pop .35s
 @keyframes vt-out{to{opacity:0;transform:translateY(-30px) scale(.985)}}
 @keyframes vt-in{from{opacity:0;transform:translateY(50px)}}
 
+
+/* ========== Scroll-up choreography, header, to-top ========== */
+.header{transition:transform .45s var(--ease),border-color .3s,background-color .5s,box-shadow .3s}
+.header.hide{transform:translateY(-100%)}
+html[data-dir=up] .header.scrolled{background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 10px 30px -20px rgba(0,0,0,.4)}
+.reveal.in[data-dir=up]{transition-timing-function:ease,cubic-bezier(.34,1.56,.64,1)}
+.js .cat.reveal[data-dir=up]:not(.in){transform:perspective(900px) translate3d(0,-70px,0) rotate(-8deg);transform-origin:0 0}
+.js .cat.reveal[data-dir=up]:nth-child(even):not(.in){transform:perspective(900px) translate3d(0,-70px,0) rotate(8deg);transform-origin:100% 0}
+.js .gift.reveal[data-dir=up]:not(.in){transform:translate3d(0,-60px,0) rotate(-5deg) scale(.94)}
+.totop{position:fixed;right:20px;bottom:20px;z-index:38;width:52px;height:52px;border-radius:50%;border:0;background:var(--accent);color:var(--on-a);display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 30px -12px color-mix(in srgb,var(--accent) 70%,transparent);opacity:0;scale:.5;pointer-events:none;transition:opacity .35s,scale .5s cubic-bezier(.34,1.56,.64,1),transform .3s var(--ease)}
+.totop svg{width:22px;height:22px}
+.totop.show{opacity:1;scale:1;pointer-events:auto}
+
+/* ========== Background life: blobs, grain, spotlight, ripple ========== */
+.hero::before,.section--tint::before,.phead::before{content:"";position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;background:
+  radial-gradient(38% 42% at 82% 30%,color-mix(in srgb,var(--b) 22%,transparent),transparent 70%),
+  radial-gradient(30% 36% at 12% 80%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%);animation:breathe 26s ease-in-out infinite alternate}
+.section--tint::before{background:radial-gradient(34% 40% at 10% 20%,color-mix(in srgb,var(--b) 20%,transparent),transparent 70%),radial-gradient(30% 34% at 90% 90%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
+html[data-theme=dark] .hero::before,html[data-theme=dark] .phead::before{opacity:.8}
+@keyframes breathe{to{transform:translate3d(3%,-4%,0) scale(1.08)}}
+body::after{content:"";position:fixed;inset:0;z-index:44;pointer-events:none;opacity:.045;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+html[data-theme=dark] body::after{mix-blend-mode:screen;opacity:.035}
+.spot{--mx:50%;--my:50%}
+.spot::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(420px circle at var(--mx) var(--my),color-mix(in srgb,var(--b) 14%,transparent),transparent 65%);opacity:0;transition:opacity .4s}
+.spot:hover::after{opacity:1}
+.cta.spot::after{background:radial-gradient(380px circle at var(--mx) var(--my),rgba(255,255,255,.16),transparent 65%)}
+.btn,.add,.tab,.cart-btn{position:relative;overflow:hidden}
+.ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.25;transform:scale(0);animation:rip .6s var(--ease) forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+html[data-motion=subtle] .emb svg,html[data-motion=subtle] .art__bg,html[data-motion=subtle] .splash__burst{animation:none}
+@media (max-width:600px){.e-c2,.e-s1,.e-ph2{display:none}.hero::before,.section--tint::before,.phead::before{animation:none}body::after{display:none}}
+
 /* ========== Responsive ========== */
 @media (max-width:1100px){
   .burger{display:grid}
@@ -451,11 +486,20 @@ details p{color:var(--mut);padding-bottom:20px;max-width:38em;animation:pop .35s
   .cta{flex-direction:column;align-items:flex-start}
   .phead__s2,.phead__s3{display:none}
 }
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .js .reveal{opacity:1;transform:none}
-  .w>i,.words[data-dir=up] .w>i{transform:none!important}
-  .splash{display:none!important}
-  .js .ph:not(.in){clip-path:none}.js .ph:not(.in) .fr{transform:translate(-50%,-50%) rotate(var(--r))}.js .ph:not(.in) .art{transform:none}
-  .js .stage .shape,.js .badge{scale:1;rotate:0deg}.js .steps li:not(.in){opacity:1;transform:none}
+/* Motion off / reduced (html.nomo) */
+.nomo *,.nomo *::before,.nomo *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.nomo .reveal{opacity:1!important;transform:none!important}
+.nomo .w>i{transform:none!important}
+.nomo .splash{display:none!important}
+.nomo .ph>*{clip-path:none!important}.nomo .fr{transform:translate(-50%,-50%) rotate(var(--r))!important}.nomo .art{transform:none!important}
+.nomo .stage .shape,.nomo .badge{scale:1!important;rotate:0deg!important}.nomo .steps li{opacity:1!important;transform:none!important}
+.nomo .footer__big span{transform:none!important}
+.cta>*{position:relative;z-index:1}.cta>.cta__star{position:absolute;z-index:0}
+
+/* touch: tap targets >= 44px, readable captions */
+@media (pointer:coarse),(max-width:600px){
+  .ibtn{width:44px;height:44px}.cart-btn{height:44px}
+  .add{min-height:44px;padding:8px 16px}.tab{min-height:44px}.qty button{width:44px;height:44px}
+  .footer__nav a,.clist a,.logo,.link{display:inline-flex;align-items:center;min-height:44px}
+  .facts dd,.row__d,.cat__t small,.gift__tag,.row__p small,.ci small{font-size:14px}
 }

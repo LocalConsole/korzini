@@ -49,7 +49,7 @@ function head(page) {
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#16211b">
 <script>
-(function(){var d=document.documentElement;d.classList.add("js");try{var s=localStorage,th=s.getItem("us_theme");if(!th)th=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.setAttribute("data-theme",th);d.setAttribute("data-palette",s.getItem("us_pal")||"anor");var l=s.getItem("us_lang");if(l==="ru"||l==="en")d.lang=l;if(!sessionStorage.getItem("us_splash")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("splash-on")}catch(e){}})();
+(function(){var d=document.documentElement,q=location.search;d.classList.add("js");try{var s=localStorage,th=s.getItem("us_theme");if(!th||th==="system")th=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.setAttribute("data-theme",th);var pal=s.getItem("us_pal")||"anor";d.setAttribute("data-palette",pal);if(pal==="custom"){var cv=JSON.parse(s.getItem("us_custom_vars")||"{}");for(var k in cv)d.style.setProperty(k,cv[k])}var l=s.getItem("us_lang");if(l==="ru"||l==="en")d.lang=l;var mo=s.getItem("us_motion")||"rich";d.setAttribute("data-motion",mo);var rm=matchMedia("(prefers-reduced-motion: reduce)").matches||mo==="off";if(rm)d.classList.add("nomo");if(!rm&&q.indexOf("frame=1")<0&&!sessionStorage.getItem("us_splash"))d.classList.add("splash-on")}catch(e){}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,6 +115,7 @@ function footer() {
   </div>
 </footer>
 
+<button class="totop" type="button" id="totop" aria-label="${t("aria.top")}" data-i18n-aria="aria.top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 <div class="overlay" id="overlay" hidden></div>
 <aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="cartTitle">
   <div class="drawer__head"><h2 id="cartTitle" data-i18n="cart.title">${t("cart.title")}</h2><button class="ibtn" type="button" id="closeCart" aria-label="${t("aria.close")}" data-i18n-aria="aria.close"><svg><use href="#s-close"/></svg></button></div>
@@ -142,6 +143,7 @@ function footer() {
 <script src="js/art.js"></script>
 <script src="data/products.js"></script>
 <script src="js/app.js"></script>
+${process.argv.includes("--prod") ? "" : '<script src="js/preview.js" defer></script>'}
 </body>
 </html>
 `;

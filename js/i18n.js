@@ -22,6 +22,7 @@
   k("aria.settings", "Ko'rinish sozlamalari", "Настройки оформления", "Appearance settings");
   k("aria.lang", "Til", "Язык", "Language");
   k("aria.cart", "Savatni ochish", "Открыть корзину", "Open cart");
+  k("aria.top", "Yuqoriga", "Наверх", "Back to top");
   k("aria.close", "Yopish", "Закрыть", "Close");
   k("aria.dec", "Kamaytirish", "Уменьшить", "Decrease");
   k("aria.inc", "Ko'paytirish", "Увеличить", "Increase");

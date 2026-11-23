@@ -1,0 +1,25 @@
+.pv{position:fixed;left:16px;bottom:16px;z-index:200;font:500 13px/1.3 var(--f-b);color:#eef1ea}
+.pv button{font:inherit;color:inherit;cursor:pointer}
+.pv__fab{height:40px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:#121a15;box-shadow:0 10px 30px -10px rgba(0,0,0,.6);font-weight:600}
+.pv__panel{position:absolute;left:0;bottom:50px;width:min(380px,calc(100vw - 32px));max-height:calc(100vh - 90px);overflow:auto;background:#121a15;border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:14px;display:none;gap:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.pv[data-open=true] .pv__panel{display:grid}
+.pv__row{display:grid;gap:6px}
+.pv__row>b{font-size:11px;color:#9fb0a5;font-weight:600}
+.pv__chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pv__chips button{min-height:32px;padding:4px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:#1a241e;display:flex;gap:6px;align-items:baseline}
+.pv__chips button small{color:#9fb0a5;font-size:11px}
+.pv__chips button[aria-pressed=true]{background:#eef1ea;color:#121a15;border-color:#eef1ea}
+.pv__chips button[aria-pressed=true] small{color:#4c5a51}
+.pv .pv__sw{width:32px;height:32px;padding:3px;border-radius:50%}
+.pv .pv__sw i{display:block;width:100%;height:100%;border-radius:50%}
+.pv__color{display:flex;align-items:center;gap:6px;padding:2px 8px 2px 2px;border:1px dashed rgba(255,255,255,.3);border-radius:999px;cursor:pointer}
+.pv__color input{width:28px;height:28px;border:0;padding:0;background:none;border-radius:50%;cursor:pointer}
+.pv__note{font-size:11px;color:#9fb0a5;min-height:1em}
+.pv__foot{display:flex;gap:6px}.pv__foot button{flex:1;min-height:34px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:#1a241e}
+.pv__stage{position:fixed;inset:0;background:rgba(6,9,7,.92);display:grid;justify-items:center;align-content:start;gap:12px;padding:14px 20px;z-index:199}
+.pv__stage[hidden]{display:none}
+.pv__bar{display:flex;gap:8px;align-items:center}
+.pv__bar span{font-weight:600;margin-right:8px}
+.pv__bar button{min-height:34px;padding:0 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#1a241e}
+.pv__frame{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 0 0 8px #1f2a23,0 40px 80px -20px #000}
+.pv__frame iframe{border:0;transform-origin:0 0;background:#fff;display:block}
