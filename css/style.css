@@ -346,28 +346,40 @@ details p{color:var(--mut);padding-bottom:20px;max-width:38em;animation:pop .35s
 @media (max-width:900px){
   .hero__in,.split,.faq,.contact{grid-template-columns:1fr}
   .stage{justify-self:center;max-width:360px;margin-top:8px}
-  .cats{grid-template-columns:repeat(2,1fr)}
+  .cat:nth-child(even){margin-top:32px}
   .steps{grid-template-columns:repeat(2,1fr)}.steps li::after{display:none}
-  .rows{columns:1}
-  .gifts{grid-template-columns:repeat(2,1fr)}
+  .gifts .gift__b{padding:14px 6px 6px}.gift h3{font-size:1.1rem}
+  .gift__f{flex-direction:column;align-items:stretch}.gift .add,.gift .qty{align-self:stretch;justify-content:space-between;text-align:center}
+  .split__media{max-width:440px;width:100%;justify-self:center}
+  .stage{max-width:340px}
   .info{grid-template-columns:1fr}
   .split--rev .split__media{order:0}
   .contact__ph{justify-self:start}
 }
+@media (max-width:700px){
+  .cats{grid-template-columns:repeat(2,1fr)}
+  .gifts{grid-template-columns:1fr;max-width:440px}
+  .gift__f{flex-direction:row;align-items:center}.gift .add,.gift .qty{align-self:auto}
+  .rows{columns:1}
+}
 @media (max-width:600px){
   .lang--head,.cart-btn__t{display:none}
+  .hero__cta .btn{flex:1 1 100%}
+  .facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:16px}
+  .facts div{padding-left:10px}.facts dt{font-size:1.2rem}.facts dd{font-size:.78rem;line-height:1.3}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -4vw;padding:2px 4vw 6px;scrollbar-width:none;width:calc(100% + 8vw)}
+  .tabs::-webkit-scrollbar{display:none}.tab{flex:none}
+  .phead__s1{display:none}
   .lang--panel{display:flex;justify-self:start}
   .header__in{gap:10px}
   .htools{gap:6px}
   .cats{gap:14px}.cat:nth-child(even){margin-top:28px}
-  .gifts{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
   .badge{width:104px;height:104px;left:-2%}
   .badge text{font-size:9.4px}
   .sh1{--s:70px}.sh4{--s:52px}
   .search,.search input{width:100%}
   .cta{flex-direction:column;align-items:flex-start}
-  .phead__s1{width:80px;height:80px;top:8%;right:4%}
   .phead__s2,.phead__s3{display:none}
 }
 @media (prefers-reduced-motion:reduce){
