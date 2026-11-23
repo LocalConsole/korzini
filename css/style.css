@@ -431,7 +431,7 @@ details p{color:var(--mut);padding-bottom:20px;max-width:38em;animation:pop .35s
   .rows{columns:1}
 }
 @media (max-width:600px){
-  .ribbons{height:110px}.e-h1,.e-t1,.e-d1{width:300px;height:300px}.e-c1,.e-s2,.e-ph1{width:200px;height:200px}
+  .ribbons{height:150px}.rib--a{top:36%;transform:translateY(-50%) rotate(-5deg)}.rib--b{top:66%;transform:translateY(-50%) rotate(4deg)}.e-h1,.e-t1,.e-d1{width:300px;height:300px}.e-c1,.e-s2,.e-ph1{width:200px;height:200px}
   .lang--head,.cart-btn__t{display:none}
   .hero__cta .btn{flex:1 1 100%}
   .facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:16px}
