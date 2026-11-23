@@ -49,7 +49,7 @@
   /* ---------- panel ---------- */
   var DEV = [["Phone", 360, 740], ["Phone+", 390, 844], ["Tablet", 768, 1024], ["Tablet+", 820, 1180], ["Laptop", 1366, 768], ["Desktop", 1920, 1080], ["Ultrawide", 2560, 1080]];
   var PALS = ["anor", "pista", "orik", "uzum", "feruza"];
-  var css = document.createElement("link"); css.rel = "stylesheet"; css.href = "css/preview.css"; document.head.appendChild(css);
+  var css = document.createElement("link"); css.rel = "stylesheet"; css.href = "css/preview.css?v=" + Date.now().toString(36).slice(0, 5); document.head.appendChild(css);
 
   var root = document.createElement("div");
   root.className = "pv"; root.setAttribute("data-open", "false");

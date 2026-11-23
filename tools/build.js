@@ -5,6 +5,9 @@ const path = require("path");
 const D = require("../js/i18n.js");
 const ART = require("../js/art.js");
 const ROOT = path.join(__dirname, "..");
+// kesh-buster: fayl mazmunidan qisqa xesh — har push'dan keyin brauzer yangi faylni oladi
+const crypto = require("crypto");
+const V = (f) => crypto.createHash("md5").update(fs.readFileSync(path.join(ROOT, f))).digest("hex").slice(0, 8);
 
 const t = (k) => { if (!D[k]) throw new Error("i18n key yo'q: " + k); return D[k].uz.replace("{free}", "300 000 so'm").replace("{fee}", "20 000 so'm"); };
 const tx = (tag, key, attrs = "") => `<${tag}${attrs ? " " + attrs : ""} data-i18n="${key}">${t(key)}</${tag}>`;
@@ -54,7 +57,7 @@ function head(page) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=${V("css/style.css")}">
 ${page === "home" ? `<script type="application/ld+json">{"@context":"https://schema.org","@type":"GroceryStore","name":"UZB Savat","description":"Yangi mevalar, quruq mevalar va sovg'a savatlari yetkazib berish","areaServed":"Toshkent","address":{"@type":"PostalAddress","addressLocality":"Toshkent","addressCountry":"UZ"},"sameAs":["https://instagram.com/uzb_savat"]}</script>` : ""}
 </head>
 <body data-page="${page}">
@@ -138,12 +141,12 @@ function footer() {
   </div>
 </aside>
 
-<script src="js/config.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/art.js"></script>
-<script src="data/products.js"></script>
-<script src="js/app.js"></script>
-${process.argv.includes("--prod") ? "" : '<script src="js/preview.js" defer></script>'}
+<script src="js/config.js?v=${V("js/config.js")}"></script>
+<script src="js/i18n.js?v=${V("js/i18n.js")}"></script>
+<script src="js/art.js?v=${V("js/art.js")}"></script>
+<script src="data/products.js?v=${V("data/products.js")}"></script>
+<script src="js/app.js?v=${V("js/app.js")}"></script>
+${process.argv.includes("--prod") ? "" : '<script src="js/preview.js?v=${V("js/preview.js")}" defer></script>'}
 </body>
 </html>
 `;
