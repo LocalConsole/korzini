@@ -58,8 +58,8 @@
       img.src = src;
     });
   }
-  function phHTML(file, shape) {
-    return '<figure class="ph ph--' + shape + '" data-src="images/' + file + '"><div class="ph__empty"><svg aria-hidden="true"><use href="#s-star"/></svg><span data-i18n="ph.label">' + esc(T("ph.label")) + "</span></div></figure>";
+  function phHTML(file, shape, art) {
+    return '<figure class="ph ph--' + shape + '" data-src="images/' + file + '"><div class="ph__empty">' + window.ART(art) + "</div></figure>";
   }
 
   /* ---------- renderers ---------- */
@@ -75,7 +75,7 @@
       '<div class="row__d">' + esc(ds(p)) + '</div><div class="row__a">' + action(p) + "</div></div>";
   }
   function giftCard(p, i) {
-    return '<article class="gift reveal" style="--d:' + i * 90 + 'ms" data-tilt>' + phHTML("gift-" + p.id.replace("sovga-", "") + ".jpg", "round") +
+    return '<article class="gift reveal" style="--d:' + i * 90 + 'ms" data-tilt>' + phHTML("gift-" + p.id.replace("sovga-", "") + ".jpg", "round", p.id.replace("sovga-", "")) +
       '<div class="gift__b"><span class="gift__tag" data-i18n="tag.' + p.tag + '">' + esc(T("tag." + p.tag)) + "</span><h3>" + esc(nm(p)) + "</h3><p>" + esc(ds(p)) + "</p>" +
       '<div class="gift__f"></div></div></article>';
   }
@@ -92,8 +92,9 @@
       return '<button type="button" class="tab" data-cat="' + id + '" aria-pressed="' + (state.cat === id) + '">' + esc(T("cat." + id)) + "</button>";
     }).join("");
   }
-  function renderList() {
+  function renderList(animate) {
     var el = $("#list"); if (!el) return;
+    var n = 0;
     var q = state.q.trim().toLowerCase(), out = "", any = false;
     CAT.forEach(function (c) {
       if (state.cat !== "all" && state.cat !== c.id) return;
@@ -104,10 +105,11 @@
       });
       if (!items.length) return;
       any = true;
-      out += '<section class="group"><div class="group__h"><h2>' + esc(T("cat." + c.id)) + "</h2><span>" + items.length + '</span></div><div class="rows">' + items.map(row).join("") + "</div></section>";
+      out += '<section class="group"><div class="group__h"><h2>' + esc(T("cat." + c.id)) + "</h2><span>" + items.length + '</span></div><div class="rows">' + items.map(function (p) { return row(p).replace('class="row"', 'class="row" style="--n:' + (n++) + '"'); }).join("") + "</div></section>";
     });
     el.innerHTML = out;
     $("#empty").hidden = any;
+    if (animate && !reduce) { el.classList.remove("anim"); void el.offsetWidth; el.classList.add("anim"); clearTimeout(el._t); el._t = setTimeout(function () { el.classList.remove("anim"); }, 1400); }
   }
   function renderHot() { var el = $("#hot"); if (el) el.innerHTML = HOT.map(byId).filter(Boolean).map(row).join(""); }
   // sovg'a kartalari bir marta chiziladi; til va savat o'zgarganda faqat matn/tugmalar yangilanadi
@@ -118,7 +120,6 @@
       var p = GIFTS[i];
       $("h3", g).textContent = nm(p); $(".gift__b p", g).textContent = ds(p);
       $(".gift__tag", g).textContent = T("tag." + p.tag);
-      $(".ph__empty span", g).textContent = T("ph.label");
     });
     renderGiftActions();
   }
@@ -126,11 +127,11 @@
     $$(".gift").forEach(function (g, i) { $(".gift__f", g).innerHTML = "<b>" + money(GIFTS[i].price) + "</b>" + action(GIFTS[i]); });
   }
   function renderMarquee() {
-    var el = $("#mq"); if (!el) return;
-    var items = P.filter(function (p) { return p.cat !== "sovga"; }).map(function (p) {
-      return "<span>" + esc(nm(p)) + '</span><svg aria-hidden="true"><use href="#s-star"/></svg>';
-    }).join("");
-    el.innerHTML = items + items;
+    var a = $("#mq"), b = $("#mq2"); if (!a) return;
+    var star = '<svg aria-hidden="true"><use href="#s-star"/></svg>';
+    var A = P.filter(function (p) { return p.cat !== "sovga"; }).map(function (p) { return "<span>" + esc(nm(p)) + "</span>" + star; }).join("");
+    var B = ["cat.meva", "cat.quruq", "cat.yongoq", "cat.sovga", "del.area.d", "cart.free"].map(function (k) { return "<span>" + esc(T(k)) + "</span>" + star; }).join("");
+    a.innerHTML = A + A; b.innerHTML = B + B + B + B;
   }
   function totals() {
     var sub = 0;
@@ -158,7 +159,7 @@
       "<li><span>" + esc(T("lbl.ig")) + '</span><a href="https://instagram.com/' + C.instagram + '" target="_blank" rel="noopener">@' + esc(C.instagram) + "</a></li>" +
       "<li><span>" + esc(T("lbl.city")) + "</span><b>" + esc(T("city")) + "</b></li>";
   }
-  function renderProducts() { renderTabs(); renderList(); renderHot(); renderGifts(); renderMarquee(); renderCart(); }
+  function renderProducts() { renderTabs(); renderList(true); renderHot(); renderGifts(); renderMarquee(); renderCart(); }
 
   /* ---------- language ---------- */
   function applyLang() {
@@ -237,7 +238,7 @@
     else if (t.hasAttribute("data-inc")) change(t.getAttribute("data-inc"), 1);
     else if (t.hasAttribute("data-dec")) change(t.getAttribute("data-dec"), -1);
     else if (t.hasAttribute("data-cat")) {
-      state.cat = t.getAttribute("data-cat"); renderTabs(); renderList();
+      state.cat = t.getAttribute("data-cat"); renderTabs(); renderList(true);
       var u = new URL(location.href); if (state.cat === "all") u.searchParams.delete("cat"); else u.searchParams.set("cat", state.cat);
       history.replaceState(null, "", u);
     }
@@ -320,22 +321,79 @@
       if (k < 1) requestAnimationFrame(tick);
     })(t0);
   }
+  var scrollDir = "down", lastY = window.scrollY, vel = 0;
   function startReveal() {
-    var els = $$(".reveal:not(.in), .words, .steps li, [data-count], #bigword");
+    var els = $$(".reveal, .words, .steps li, [data-count], #bigword, .ph");
     if (reduce || !("IntersectionObserver" in window)) { els.forEach(function (el) { el.classList.add("in"); countUp(el, true); }); return; }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        en.target.classList.add("in"); countUp(en.target); io.unobserve(en.target);
+        var el = en.target;
+        if (en.isIntersecting) {
+          if (el.classList.contains("in")) return;
+          el.style.transition = "none";
+          el.setAttribute("data-dir", scrollDir);
+          void el.offsetWidth;
+          el.style.transition = "";
+          requestAnimationFrame(function () { el.classList.add("in"); });
+          if (!el._counted) { el._counted = 1; countUp(el); }
+        } else if (el.classList.contains("in")) {
+          // ekrandan chiqdi: qaytib kirganda yo'nalishga qarab yana animatsiya
+          el.classList.remove("in");
+        }
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    }, { threshold: 0.08, rootMargin: "-4% 0px -4% 0px" });
     var vh = window.innerHeight;
     els.forEach(function (el) {
       var r = el.getBoundingClientRect();
-      if (r.top < vh && r.bottom > 0) { el.classList.add("in"); countUp(el); }
-      else io.observe(el);
+      if (r.top < vh && r.bottom > 0) { el.setAttribute("data-dir", "down"); el.classList.add("in"); el._counted = 1; countUp(el); }
+      io.observe(el);
     });
   }
+  /* ---------- scroll-linked: progress, emblems, ribbons ---------- */
+  var bar = $("#progress"), embs = $$("[data-par]"), heroText = $(".hero__text");
+  var ribA = $("#mq"), ribB = $("#mq2"), ra = 0, rb = 0, ticking = false;
+  function onScrollFx() {
+    var y = window.scrollY, dy = y - lastY;
+    if (Math.abs(dy) > 1) scrollDir = dy > 0 ? "down" : "up";
+    vel += dy * 0.08; lastY = y;
+    if (!ticking) { ticking = true; requestAnimationFrame(scrollFrame); }
+  }
+  function scrollFrame() {
+    ticking = false;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (bar) bar.style.transform = "scaleX(" + (h > 0 ? window.scrollY / h : 0) + ")";
+    if (reduce) return;
+    var vh = window.innerHeight;
+    embs.forEach(function (el) {
+      var r = el.parentNode.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      var p = (r.top + r.height / 2 - vh / 2) / vh;
+      el.style.transform = "translate3d(0," + (p * +el.getAttribute("data-par") * 160).toFixed(1) + "px,0) rotate(" + (p * +el.getAttribute("data-rot")).toFixed(1) + "deg)";
+    });
+    if (heroText) {
+      var hy = Math.min(window.scrollY, vh);
+      heroText.style.transform = "translate3d(0," + (hy * 0.18).toFixed(1) + "px,0)";
+      heroText.style.opacity = String(Math.max(0, 1 - hy / (vh * 0.9)));
+    }
+  }
+  function ribbonLoop() {
+    if (!ribA || reduce) return;
+    var wa = ribA.scrollWidth / 2, wb = ribB.scrollWidth / 4;
+    (function frame() {
+      vel *= 0.92;
+      var dir = scrollDir === "down" ? 1 : -1, sp = 0.55 + Math.min(Math.abs(vel), 14);
+      ra -= sp * dir; rb += sp * dir;
+      if (ra <= -wa) ra += wa; if (ra > 0) ra -= wa;
+      if (rb >= 0) rb -= wb; if (rb < -wb) rb += wb;
+      var sk = Math.max(-8, Math.min(8, vel * 0.6));
+      ribA.style.transform = "translate3d(" + ra.toFixed(1) + "px,0,0) skewX(" + (-sk).toFixed(2) + "deg)";
+      ribB.style.transform = "translate3d(" + rb.toFixed(1) + "px,0,0) skewX(" + sk.toFixed(2) + "deg)";
+      requestAnimationFrame(frame);
+    })();
+    window.addEventListener("resize", function () { wa = ribA.scrollWidth / 2; wb = ribB.scrollWidth / 4; });
+  }
+  window.addEventListener("scroll", onScrollFx, { passive: true });
+
   function bindTilt(root) {
     if (!finePointer || reduce) return;
     $$("[data-tilt]", root).forEach(function (el) {
@@ -388,18 +446,18 @@
   $$("[data-tg]").forEach(function (a) { a.href = "https://t.me/" + C.telegram; });
   $("#year").textContent = new Date().getFullYear();
 
-  function ready() { html.classList.add("ready"); startReveal(); }
+  function ready() { html.classList.add("ready"); startReveal(); scrollFrame(); ribbonLoop(); }
   if (html.classList.contains("splash-on")) {
-    var t0 = performance.now(), minT = 1250;
+    var t0 = performance.now(), minT = 1900;
     var fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
     Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 2000); })]).then(function () {
       setTimeout(function () {
         html.classList.add("splash-go");
-        setTimeout(ready, 380);
+        setTimeout(ready, 300);
         setTimeout(function () {
           html.classList.remove("splash-on", "splash-go");
           try { sessionStorage.setItem("us_splash", "1"); } catch (e) {}
-        }, 1050);
+        }, 1300);
       }, Math.max(0, minT - (performance.now() - t0)));
     });
   } else ready();
