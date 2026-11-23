@@ -321,7 +321,7 @@
     })(t0);
   }
   function startReveal() {
-    var els = $$(".reveal:not(.in), .words, .steps li, [data-count]");
+    var els = $$(".reveal:not(.in), .words, .steps li, [data-count], #bigword");
     if (reduce || !("IntersectionObserver" in window)) { els.forEach(function (el) { el.classList.add("in"); countUp(el, true); }); return; }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -367,6 +367,17 @@
       shapes.forEach(function (s) { var d = +s.getAttribute("data-depth"); s.style.transform = "translate(" + x * d + "px," + y * d + "px)"; });
     }, { passive: true });
   }
+
+  /* ---------- footer word: konteyner kengligiga aniq moslash ---------- */
+  function fitBig() {
+    var el = $("#bigword"); if (!el) return;
+    el.style.fontSize = "100px";
+    var w = 0; $$("span", el).forEach(function (s) { w += s.getBoundingClientRect().width; });
+    el.style.fontSize = Math.max(40, 100 * el.clientWidth / w * 0.985) + "px";
+  }
+  fitBig();
+  window.addEventListener("resize", fitBig);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitBig);
 
   /* ---------- boot ---------- */
   applyLang();

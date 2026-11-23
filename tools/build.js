@@ -92,7 +92,7 @@ function footer() {
       <div><a class="logo" href="index.html"><svg aria-hidden="true"><use href="#s-star"/></svg><span>UZB Savat</span></a>${tx("p", "foot.tag", 'class="footer__tag"')}</div>
       <nav class="footer__nav">${NAV.map(([k, h]) => `<a href="${h}" data-i18n="nav.${k}">${t("nav." + k)}</a>`).join("")}</nav>
     </div>
-    <div class="footer__big" aria-hidden="true">UZB Savat</div>
+    <div class="footer__big" id="bigword" aria-hidden="true">${"UZB Savat".split("").map((c, i) => c === " " ? '<span class="sp"></span>' : `<span style="--i:${i}">${c}</span>`).join("")}</div>
     <div class="footer__bottom"><span>&copy; <span id="year">2026</span> UZB Savat</span>${tx("span", "foot.demo")}</div>
   </div>
 </footer>

@@ -303,7 +303,11 @@ details p{color:var(--mut);padding-bottom:20px;max-width:38em;animation:pop .35s
 .footer__tag{color:var(--mut);margin-top:10px;max-width:24em}
 .footer__nav{display:flex;flex-wrap:wrap;gap:8px 24px}
 .footer__nav a{text-decoration:none;font-weight:500}.footer__nav a:hover{color:var(--accent)}
-.footer__big{font:700 clamp(3.4rem,15.5vw,13rem) var(--f-d);letter-spacing:-.05em;line-height:.85;white-space:nowrap;margin:48px 0 0;color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--accent) 55%,transparent);user-select:none;transform:translateY(12%)}
+.footer__big{display:flex;justify-content:space-between;align-items:flex-end;font:700 10rem/1 var(--f-d);letter-spacing:-.04em;white-space:nowrap;margin:56px 0 0;padding-top:.08em;overflow:hidden;user-select:none;color:var(--accent)}
+.footer__big span{display:inline-block;transform:translateY(105%);transition:transform .9s var(--ease),color .3s;transition-delay:calc(var(--i)*45ms)}
+.footer__big.in span{transform:none}
+.footer__big.in span:hover{transform:translateY(-10%) rotate(-4deg);color:var(--b);transition-delay:0s;transition-duration:.35s}
+.footer__big .sp{width:.28em}
 .footer__bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 0 24px;border-top:1px solid var(--line);color:var(--mut);font-size:.86rem;position:relative;background:var(--bg)}
 
 /* ========== Drawer ========== */
